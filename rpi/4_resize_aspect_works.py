@@ -20,6 +20,3 @@ img.save(new_file)
 
 width, height = img.size
 print(f"{new_file} is {width} x {height}")
-
-with open('/var/www/html/filesize.txt','w') as fh:
-    fh.write(f"{width}:{height}")

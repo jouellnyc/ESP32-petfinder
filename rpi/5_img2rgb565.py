@@ -7,7 +7,6 @@ from struct import pack
 from os import path
 import sys
 
-
 def error(msg):
     """Display error and exit."""
     print (msg)
@@ -38,4 +37,3 @@ if __name__ == '__main__':
     with open(out_path, 'wb') as f:
         write_bin(f, pixels)
     print('Saved: ' + out_path)
-
