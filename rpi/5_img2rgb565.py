@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# https://github.com/rdagger/micropython-ili9341
+
 """Utility to convert images to raw RGB565 format."""
 
 from PIL import Image
