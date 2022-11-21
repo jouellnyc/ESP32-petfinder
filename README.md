@@ -1,7 +1,9 @@
 # esp32-picbooth
 
 ## What is this?
+
 Stream Possible Pet Pic Perpetually ...
+
 <img src="images/pfinder.jpg"  width="200"/>
 
 Uses the Pet Finder API - https://www.petfinder.com/developers/v2/docs/ 
