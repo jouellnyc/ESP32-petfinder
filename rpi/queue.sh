@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Move the raw file one by one to the root of the webserver to a static file name that the esp32 is expecting
+
 while [ 1 ] ; do 
 
 
