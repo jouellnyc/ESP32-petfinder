@@ -26,6 +26,6 @@ Guilt. Mostly. Get the pet you deserve!
 
 - Configs / Libraries shared in https://github.com/jouellnyc/mcconfigs 
 
-## Warning 
+## Warnings
 - In process ..
 - Cute Animals overload ..
