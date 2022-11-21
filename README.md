@@ -22,7 +22,6 @@ Guilt. Mostly. Get the pet you deserve!
 
 - Since the esp32 is not powerful enough to process images and does not have the pillow package you'll need another computer like a Raspberry Pi to process the images. This machine will also be running Nginx (or any HTTP server) to serve the raw data to the ESP32 for it to consume and send to its screen.
 
+- Since this is another outake from https://github.com/jouellnyc/ESP32-picbooth, you can find more details there, also the picbooth/ folder is literally the same 'client' that runs on the ESP32.
 
-This is another outake from https://github.com/jouellnyc/ESP32-picbooth , more details there.
-
-Configs / Libraries shared in https://github.com/jouellnyc/mcconfigs 
+- Configs / Libraries shared in https://github.com/jouellnyc/mcconfigs 
