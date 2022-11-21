@@ -2,7 +2,7 @@
 
 ## What is this?
 
-Stream Possible Pet Pic Perpetually ...
+Stream Possible Pet Pics Perpetually ...
 
 <img src="images/pfinder.jpg"  width="200"/>
 
