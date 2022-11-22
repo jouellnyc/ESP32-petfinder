@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+""" Resize the photos to the the ILI9341 screen """
+
 import sys
 
 from PIL import Image

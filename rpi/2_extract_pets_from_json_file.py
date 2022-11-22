@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+""" Extract pet records and create a list of pets and photo urls to crawl in the next step """
+
 import json
 
 fh = open('pets.json')

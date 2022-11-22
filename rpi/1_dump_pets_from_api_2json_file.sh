@@ -1,5 +1,8 @@
 #!/bin/bash
 
+""" Pull data from the Pet Finder API and save to .json file"""
+""" https://www.petfinder.com/developers/v2/docs/ """
+
 CLIENT_ID="XXXXXXXXXX"
 CLIENT_SECRET="YYYYYY"
 
