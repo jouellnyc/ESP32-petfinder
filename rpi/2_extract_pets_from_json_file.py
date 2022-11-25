@@ -17,7 +17,9 @@ for k in data['animals']:
         k['name'] = k['name'].replace(' ', '')
         k['name'] = k['name'].replace('(', '_')
         k['name'] = k['name'].replace(')', '_')
-        url=k['photos'][0]['medium']
+        #Small pics seems easier to make larger than 
+        #to make large pics to smaller for the ili9341 and underlying libraries 
+        url=k['photos'][0]['small']
         pets[k['name']]=url 
     except IndexError:
         print(f"{k['name']} has no photos")
