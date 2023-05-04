@@ -30,7 +30,7 @@ if __name__ == '__main__':
         error('Please specify input file: ./img2rgb565.py test.png')
     in_path = args[1]
     if not path.exists(in_path):
-        error('File Not Found: ' + in_path)
+        error(f'File Not Found: {in_path}')
 
     filename, ext = path.splitext(in_path)
     out_path = filename + ext + '.raw'
@@ -38,4 +38,4 @@ if __name__ == '__main__':
     pixels = list(img.getdata())
     with open(out_path, 'wb') as f:
         write_bin(f, pixels)
-    print('Saved: ' + out_path)
+    print(f'Saved: {out_path}')
