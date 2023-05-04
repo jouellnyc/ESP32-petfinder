@@ -10,8 +10,7 @@ my_sleep=30
 def custom_to_buff(data):
     width = data[0]
     height = data[1]
-    fbuff = framebuf.FrameBuffer(data[2:],width,height, framebuf.MONO_HLSB)
-    return fbuff
+    return framebuf.FrameBuffer(data[2:],width,height, framebuf.MONO_HLSB)
       
 def show_image(image,display):
     display.blit(image, 0, 0)
@@ -39,26 +38,24 @@ if displayt == 'ili9341':
             width=int(width)
             height=int(height)
             name = get_name_file()
-            
+
             if height > 239:
                 height=239
                 print("height reduced to  239")
-        
+
             display.clear()
             display.draw_image('/256.my_photo.jpg.raw', 0, 0, width, height)
             if show_name:
                 display.draw_text(0, 0, name, date_font,  white , black)
         except Exception as e:
             print(e)
-            pass
-        
         print(f"sleeping {my_sleep}")
         time.sleep(my_sleep)            
-        
+
 else:
-    
+
     while True:
-        
+
         try:
             ziva = str(urequests.get('http://192.168.0.94:5000/picbooth/').text)
             print('Got it!')
