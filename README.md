@@ -24,8 +24,5 @@ Guilt. Mostly. Get the pet you deserve!
 
 - Since this is another outake from https://github.com/jouellnyc/ESP32-picbooth, you can find more details there.
 
-- Configs / Libraries shared in https://github.com/jouellnyc/mcconfigs 
-
 ## Warnings
-- In process ..
 - Cute Animals overload ..
