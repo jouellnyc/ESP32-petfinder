@@ -9,7 +9,8 @@ Stream Possible Pet Pics Perpetually ...
 Uses the Pet Finder API - https://www.petfinder.com/developers/v2/docs/ 
 
 ## Why?
-Guilt. Mostly. Get the pet you deserve!
+Guilt. Mostly. Get the pet you deserve! Do you have someone on the fence about a pet? Setup the Petfinder for that final push.
+
 
 ## Requirements
 - esp32
