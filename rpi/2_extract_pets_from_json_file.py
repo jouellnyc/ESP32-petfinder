@@ -8,6 +8,7 @@ import json
 import logging
 from pathlib import Path
 from typing import Dict, Any
+import argparse
 
 def clean_name(name: str) -> str:
     """Clean and sanitize pet name for file/output use."""
@@ -15,19 +16,23 @@ def clean_name(name: str) -> str:
     name = name.replace('(', '_').replace(')', '_')
     return name
 
-def extract_pets(input_file: Path = Path('pets.json'), output_file: Path = Path('pets.wget.queue.txt')) -> None:
+def extract_pets(input_file: Path = Path('pets.json'), output_file: Path = Path('pets.wget.queue.txt'), photo_size: str = 'small') -> None:
     """
     Extract pets with photos from the input JSON file and write name:url pairs to the output file.
+    Args:
+        input_file: Path to the input JSON.
+        output_file: Path to the output txt.
+        photo_size: Preferred photo size key ('small', 'medium', etc.)
     """
-    logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
     try:
+        if not input_file.exists():
+            logging.error(f"Input file {input_file} not found.")
+            return
         with input_file.open() as fh:
             data = json.load(fh)
-    except FileNotFoundError:
-        logging.error(f"Input file {input_file} not found.")
-        return
     except json.JSONDecodeError:
-        logging.error(f"Failed to parse {input_file}.")
+        logging.exception(f"Failed to parse {input_file}.")
         return
 
     if not isinstance(data, dict) or 'animals' not in data:
@@ -40,35 +45,37 @@ def extract_pets(input_file: Path = Path('pets.json'), output_file: Path = Path(
     for k in data['animals']:
         try:
             name = k.get('name', '').strip()
-            # Clean first, then check for courtesy
-            cleaned_name = clean_name(name)
             if 'courtesy' in name.lower():
                 skipped_courtesy += 1
                 continue
             photos = k.get('photos', [])
-            if not photos:
-                logging.warning(f"{name} has no photos")
+            if not photos or not isinstance(photos[0], dict):
+                logging.warning(f"{name} has no valid photos")
                 skipped_no_photo += 1
                 continue
-            # Prefer 'small' version, fallback to first url if needed
-            url = photos[0].get('small') or next(iter(photos[0].values()), None)
+            url = photos[0].get(photo_size) or next(iter(photos[0].values()), None)
             if not url:
                 logging.warning(f"No usable photo for {name}")
                 skipped_no_photo += 1
                 continue
+            cleaned_name = clean_name(name)
             pets[cleaned_name] = url
         except Exception as e:
-            logging.error(f"Error processing pet {k.get('name', 'UNKNOWN')}: {e}")
+            logging.exception(f"Error processing pet {k.get('name', 'UNKNOWN')}")
 
-    lines = [f"{k}:{v}\n" for k, v in pets.items()]
     with output_file.open('w') as fh:
-        fh.writelines(lines)
+        fh.writelines(f"{k}:{v}\n" for k, v in pets.items())
 
     logging.info(f"Wrote {len(pets)} pets to {output_file}")
     logging.info(f"Skipped {skipped_no_photo} pets with no photos and {skipped_courtesy} courtesy pets.")
 
 def main() -> None:
-    extract_pets()
+    parser = argparse.ArgumentParser(description="Extract pets with photos from a JSON file.")
+    parser.add_argument('--input', type=str, default='pets.json', help='Input JSON file (default: pets.json)')
+    parser.add_argument('--output', type=str, default='pets.wget.queue.txt', help='Output queue file (default: pets.wget.queue.txt)')
+    parser.add_argument('--photo-size', type=str, default='small', help="Preferred photo size (default: 'small')")
+    args = parser.parse_args()
+    extract_pets(Path(args.input), Path(args.output), args.photo_size)
 
 if __name__ == "__main__":
     main()
