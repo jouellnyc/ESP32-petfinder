@@ -4,6 +4,9 @@
 # This script moves raw files to the webserver root directory under a static filename.
 # It ensures the ESP32 device can access the expected file with robust error handling,
 # configurable parameters, timestamped logging, and file archiving.
+#
+# Performance Note: For better efficiency, consider using inotifywait from inotify-tools
+# instead of polling. Example: inotifywait -m -e create,moved_to --format '%w%f' "$SOURCE_DIR"
 
 # Configurable parameters (can be overridden by env vars or args)
 SOURCE_DIR="${1:-${SOURCE_DIR:-.}}"
