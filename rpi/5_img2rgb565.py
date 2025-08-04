@@ -495,7 +495,7 @@ def test_rgb565_conversion() -> None:
         0xFFFF,  # White: 11111 111111 11111
         0x0000,  # Black: 00000 000000 00000
         0x8410,  # Gray: 10000 100000 10000 (approximated)
-        0xFC20,  # Orange: 11111 100000 00100 (approximated)
+        0xFC08,  # Orange: 11111 100000 01000 (corrected calculation)
     ]
     
     f = io.BytesIO()
