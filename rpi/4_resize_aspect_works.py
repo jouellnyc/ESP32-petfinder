@@ -34,13 +34,32 @@ def main():
         print("Error: Unsupported file format or corrupted file.")
         sys.exit(1)
     
+    # Calculate aspect ratio
     try:
         wpercent = (basewidth / float(img.size[0]))
+    except (ZeroDivisionError, ValueError) as e:
+        print(f"Error calculating aspect ratio: {e}")
+        sys.exit(1)
+    
+    # Calculate new height based on aspect ratio
+    try:
         hsize = int((float(img.size[1]) * float(wpercent)))
+    except (ValueError, OverflowError) as e:
+        print(f"Error calculating new height: {e}")
+        sys.exit(1)
+    
+    # Resize the image
+    try:
         img = img.resize((basewidth, hsize), Image.Resampling.LANCZOS)
+    except (ValueError, MemoryError) as e:
+        print(f"Error resizing image: {e}")
+        sys.exit(1)
+    
+    # Save the resized image
+    try:
         img.save(new_file)
-    except Exception as e:
-        print(f"Unexpected error during resize or save: {e}")
+    except (IOError, OSError) as e:
+        print(f"Error saving image to '{new_file}': {e}")
         sys.exit(1)
 
     width, height = img.size
